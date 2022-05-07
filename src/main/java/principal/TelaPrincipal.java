@@ -134,23 +134,27 @@ public class TelaPrincipal extends JFrame {
             }
         };
         
-        // Lista de lixeiras
-        ArrayList<String> listaLixeiras = new ArrayList();
-        listaLixeiras.add("lixeiraPapel");
-        listaLixeiras.add("lixeiraPlastico");
-        listaLixeiras.add("lixeiraVidro");
-        listaLixeiras.add("lixeiraMetal");
-        listaLixeiras.add("lixeiraOrganica");
-        listaLixeiras.add("lixeiraAmbulatorial");
-        listaLixeiras.add("lixeiraMadeira");
+        // Lista de lixeiras com o caminho da imagem
+        Map<String, String> listaLixeiras = new HashMap<>();        
+        listaLixeiras.put("lixeiraPapel", "src/images/img-lixeira-papel.jpg");
+        listaLixeiras.put("lixeiraPlastico", "src/images/img-lixeira-plastico.png");
+        listaLixeiras.put("lixeiraVidro", "src/images/img-lixeira-vidro.jpg");
+        listaLixeiras.put("lixeiraMetal", "src/images/img-lixeira-metal.jpg");
+        listaLixeiras.put("lixeiraOrganica", "src/images/img-lixeira-organica.jpg");
+        listaLixeiras.put("lixeiraAmbulatorial", "src/images/img-lixeira-ambulatorial.jpg");
+        listaLixeiras.put("lixeiraMadeira", "src/images/img-lixeira-madeira.png");
         
         // Cria os botões de lixeiras
         int x = 10;
-        for(int iLixeira = 0; iLixeira < listaLixeiras.size(); iLixeira++){
-            JButton lixeira = new JButton(listaLixeiras.get(iLixeira));
-            lixeira.setName(listaLixeiras.get(iLixeira));
+        for(String key : listaLixeiras.keySet()){
+            // Cria uma imagem
+            Icon imagemLixeira = new ImageIcon(listaLixeiras.get(key));
+            
+            JButton lixeira = new JButton(key);
+            lixeira.setName(key);
             this.painel.add(lixeira);
             lixeira.setBounds(x, 240, 100, 100);
+            lixeira.setIcon(imagemLixeira);            
             lixeira.addActionListener(acaoBotoes);
             x += 110;
         }
