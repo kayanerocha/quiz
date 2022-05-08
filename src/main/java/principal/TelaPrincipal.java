@@ -41,24 +41,34 @@ public class TelaPrincipal extends JFrame {
         this.setVisible(true);
         
         // Lista de lixos
-        ArrayList<String> listaLixos = new ArrayList();
-        listaLixos.add("papel");
-        listaLixos.add("plastico");
-        listaLixos.add("vidro");
-        listaLixos.add("metal");
-        listaLixos.add("organico");
-        listaLixos.add("ambulatorial");
-        listaLixos.add("madeira");
+        ArrayList<String> nomesLixos = new ArrayList();
+        nomesLixos.add("papel");
+        nomesLixos.add("plastico");
+        nomesLixos.add("vidro");
+        nomesLixos.add("metal");
+        nomesLixos.add("organico");
+        nomesLixos.add("ambulatorial");
+        nomesLixos.add("madeira");
+        
+        // Lista de lixos
+        Map<String, String> listaLixos = new HashMap<>();
+        listaLixos.put("papel", "src/images/img-papel.jpg");
+        listaLixos.put("plastico", "src/images/img-plastico.png");
+        listaLixos.put("vidro", "src/images/img-vidro.jpg");
+        listaLixos.put("metal", "src/images/img-metal.jpeg");
+        listaLixos.put("organico", "src/images/img-organico.jpg");
+        listaLixos.put("ambulatorial", "src/images/img-ambulatorial.jpg");
+        listaLixos.put("madeira", "src/images/img-madeira.jpg");
         
         // Botão com lixo aleatório
         JButton lixo = new JButton("lixo");
         lixo.setName("lixo");
-        lixo.setEnabled(false);
+        // lixo.setEnabled(false);
         this.painel.add(lixo);
         lixo.setBounds(300, 10, 200, 200); // Adiciona o botão em uma posição
         
         // Altera para um lixo aleatório
-        alteraLixo(lixo, listaLixos);
+        alteraLixo(lixo, nomesLixos, listaLixos);
         
         // Label que mostra a pontuação
         this.pontuacao = new JLabel("Pontuação: 0");
@@ -89,31 +99,31 @@ public class TelaPrincipal extends JFrame {
                     
                 if(tipoLixo == "papel" && lixeira == "lixeiraPapel"){
                     resultado.setText("Acertou! Continue jogando.");
-                    alteraLixo(lixo, listaLixos);
+                    alteraLixo(lixo, nomesLixos, listaLixos);
                     pontos += 1;
                 }else if(tipoLixo == "plastico" && lixeira == "lixeiraPlastico"){
                     resultado.setText("Acertou! Continue jogando.");
-                    alteraLixo(lixo, listaLixos);
+                    alteraLixo(lixo, nomesLixos, listaLixos);
                     pontos += 1;
                 }else if(tipoLixo == "vidro" && lixeira == "lixeiraVidro"){
                     resultado.setText("Acertou! Continue jogando.");
-                    alteraLixo(lixo, listaLixos);
+                    alteraLixo(lixo, nomesLixos, listaLixos);
                     pontos += 1;
                 }else if(tipoLixo == "metal" && lixeira == "lixeiraMetal"){
                     resultado.setText("Acertou! Continue jogando.");
-                    alteraLixo(lixo, listaLixos);
+                    alteraLixo(lixo, nomesLixos, listaLixos);
                     pontos += 1;
                 }else if(tipoLixo == "organico" && lixeira == "lixeiraOrganica"){
                     resultado.setText("Acertou! Continue jogando.");
-                    alteraLixo(lixo, listaLixos);
+                    alteraLixo(lixo, nomesLixos, listaLixos);
                     pontos += 1;
                 }else if(tipoLixo == "ambulatorial" && lixeira == "lixeiraAmbulatorial"){
                     resultado.setText("Acertou! Continue jogando.");
-                    alteraLixo(lixo, listaLixos);
+                    alteraLixo(lixo,nomesLixos, listaLixos);
                     pontos += 1;
                 }else if(tipoLixo == "madeira" && lixeira == "lixeiraMadeira"){
                     resultado.setText("Acertou! Continue jogando.");
-                    alteraLixo(lixo, listaLixos);
+                    alteraLixo(lixo, nomesLixos, listaLixos);
                     pontos += 1;
                 }
                 else{
@@ -160,17 +170,20 @@ public class TelaPrincipal extends JFrame {
         }
     }
     
-    public JButton alteraLixo(JButton lixo, ArrayList<String> listaLixos){
-        if(listaLixos.size() > 0){
+    public JButton alteraLixo(JButton lixo, ArrayList<String> nomesLixos, Map<String, String> listaLixos){        
+        if(nomesLixos.size() > 0){          
             // Escolhe lixo aleatório da lista
             Random rand = new Random();
-            int posicao = rand.nextInt(((listaLixos.size() - 1) > 0) ? listaLixos.size() - 1 : 1);
-            String nomeLixo = listaLixos.get(posicao);
-            listaLixos.remove(posicao); // Remove para não repetir
-
+            int posicao = rand.nextInt(((nomesLixos.size() - 1) > 0) ? nomesLixos.size() - 1 : 1);
+            String nomeLixo = nomesLixos.get(posicao);
+            nomesLixos.remove(posicao); // Remove para não repetir
+            
+            Icon imagemLixo = new ImageIcon(listaLixos.get(nomeLixo));
+            
             // Recebe as características de um novo lixo
             lixo.setText(nomeLixo);
             lixo.setName(nomeLixo);
+            lixo.setIcon(imagemLixo);
         }else{
             resultado.setText("Fim de jogo, você ganhou!.");
             
