@@ -164,6 +164,7 @@ public class TelaPrincipal extends JFrame {
             this.painel.add(lixeira); // Adiciona no painel
             lixeira.setBounds(x, 240, 100, 100); // Posição e tamanho
             lixeira.setBackground(listaLixeiras.get(key)); // Cor de fundo
+            lixeira.setText("");
             lixeira.addActionListener(acaoBotoes); // Adiciona a ação criaada anteriormente
             x += 110;
         }
