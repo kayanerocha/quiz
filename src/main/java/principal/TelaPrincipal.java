@@ -15,6 +15,7 @@ import java.util.Timer;
  * @author kayane
  */
 public class TelaPrincipal extends JFrame {
+    private String modo;
     private JPanel painel;
     private JLabel lixo;
     private JButton btnLixeira;
@@ -25,8 +26,11 @@ public class TelaPrincipal extends JFrame {
     private int numErrosPermitidos = 3;
     private JLabel resultado;  
     
-    public TelaPrincipal(){
+    public TelaPrincipal(String modo){
         super("Quiz");
+        
+        // Modo que o usuário escolheu
+        this.modo = modo;
         
         // Cria um painel
         painel = new JPanel();
@@ -179,9 +183,9 @@ public class TelaPrincipal extends JFrame {
                 pontuacao.setText("Pontuação: " + pontos);
                 
                 // Atualiza as chances restantes
-                errosPermitidos.setText("Jogadas restantes: " + numErrosPermitidos);
+                errosPermitidos.setText("Erros permitidos: " + numErrosPermitidos);
                 
-                if(numErrosPermitidos == 0){
+                if(numErrosPermitidos < 0){
                     JOptionPane.showMessageDialog(null, "Fim de Jogo, você perdeu!");
                     finalizaJogo();
                 }

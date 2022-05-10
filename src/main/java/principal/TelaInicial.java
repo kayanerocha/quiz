@@ -17,7 +17,9 @@ public class TelaInicial extends JFrame{
     private JPanel painel;
     private JLabel nomeJogo;
     private JTextArea descricao;
-    private JButton iniciaJogo;
+    private JButton iniciaJogoFacil;
+    private JButton iniciaJogoMedio;
+    private JButton iniciaJogoDificil;
     private ActionListener iniciar;
     
     public TelaInicial(){
@@ -54,13 +56,29 @@ public class TelaInicial extends JFrame{
         descricao.setEditable(false);
         descricao.setLineWrap(true);
         
-        // Cria botão que inicia o jogo
-        iniciaJogo = new JButton("Jogar");
-        iniciaJogo.setName("iniciaJogo");
-        this.painel.add(iniciaJogo);
-        iniciaJogo.setBounds(190, 250, 100, 30);
-        iniciaJogo.setBackground(Color.decode("#87CEFA"));
-        iniciaJogo.addActionListener(iniciaJogo()); // Insere uma ação no botão
+        // Cria botão que inicia o jogo no modo fácil
+        iniciaJogoFacil = new JButton("Fácil");
+        iniciaJogoFacil.setName("iniciaJogo");
+        this.painel.add(iniciaJogoFacil);
+        iniciaJogoFacil.setBounds(90, 250, 100, 30);
+        iniciaJogoFacil.setBackground(Color.decode("#87CEFA"));
+        iniciaJogoFacil.addActionListener(iniciaJogo()); // Insere uma ação no botão
+        
+        // Cria botão que inicia o jogo no modo médio
+        iniciaJogoMedio = new JButton("Médio");
+        iniciaJogoMedio.setName("iniciaJogo");
+        this.painel.add(iniciaJogoMedio);
+        iniciaJogoMedio.setBounds(200, 250, 100, 30);
+        iniciaJogoMedio.setBackground(Color.decode("#87CEFA"));
+        iniciaJogoMedio.addActionListener(iniciaJogo()); // Insere uma ação no botão
+        
+        // Cria botão que inicia o jogo no modo difícil
+        iniciaJogoDificil = new JButton("Difícil");
+        iniciaJogoDificil.setName("iniciaJogo");
+        this.painel.add(iniciaJogoDificil);
+        iniciaJogoDificil.setBounds(310, 250, 100, 30);
+        iniciaJogoDificil.setBackground(Color.decode("#87CEFA"));
+        iniciaJogoDificil.addActionListener(iniciaJogo()); // Insere uma ação no botão
     }
     
     // Função que abre o JFrame principal
@@ -68,8 +86,11 @@ public class TelaInicial extends JFrame{
         iniciar = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                TelaPrincipal telaPrincipal = new TelaPrincipal();
-                dispose(); // Fecha a tela inicial
+                // getSource() retorna um objeto Object que é pai de todos os outros, incluindo JButton
+                JButton botao = (JButton) e.getSource();
+                String modo = botao.getName();
+                TelaPrincipal telaPrincipal = new TelaPrincipal(modo);
+                dispose(); // Fecha a tela inicial                
             }
         };        
         return iniciar;
