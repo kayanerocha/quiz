@@ -16,14 +16,14 @@ import java.util.Timer;
  */
 public class TelaPrincipal extends JFrame {
     private JPanel painel;
-    private ActionListener acaoBotoes;
-    private String tipoLixo;
-    private String lixeira;
-    private int pontos;
+    private JLabel lixo;
+    private JButton btnLixeira;
+    private ActionListener escolheLixeira;
     private JLabel pontuacao;
-    private int numErrosPermitidos = 3;
+    private int pontos;
     private JLabel errosPermitidos;
-    private JLabel resultado;
+    private int numErrosPermitidos = 3;
+    private JLabel resultado;  
     
     public TelaPrincipal(){
         super("Quiz");
@@ -62,7 +62,7 @@ public class TelaPrincipal extends JFrame {
         listaLixos.put("madeira", "src/images/img-madeira.jpg");
         
         // Label com lixo aleatório
-        JLabel lixo = new JLabel("");
+        lixo = new JLabel("");
         lixo.setName("lixo");
         this.painel.add(lixo);
         
@@ -82,11 +82,41 @@ public class TelaPrincipal extends JFrame {
         // Label que mostra se errou
         this.resultado = new JLabel("");
         this.painel.add(this.resultado);
-        this.resultado.setBounds(340, 280, 200, 200);
+        this.resultado.setBounds(340, 280, 200, 200);      
         
+        
+        
+        // Lista de lixeiras com as cores correspondentes
+        Map<String, Color> listaLixeiras = new HashMap<>();  
+        listaLixeiras.put("lixeiraPapel", Color.BLUE);
+        listaLixeiras.put("lixeiraPlastico", Color.RED);
+        listaLixeiras.put("lixeiraVidro", Color.GREEN);
+        listaLixeiras.put("lixeiraMetal", Color.YELLOW);
+        listaLixeiras.put("lixeiraOrganica", Color.decode("#A0522D"));
+        listaLixeiras.put("lixeiraAmbulatorial", Color.WHITE);
+        listaLixeiras.put("lixeiraMadeira", Color.BLACK);
+        
+        // Cria os botões de lixeiras
+        int x = 10;
+        for(String key : listaLixeiras.keySet()){            
+            // Cria um botão para lixeira
+            btnLixeira = new JButton(key);
             
+            // Define as caracterísitcas dos botões
+            btnLixeira.setName(key); // nome que vem na chave do HashMap
+            this.painel.add(btnLixeira); // Adiciona no painel
+            btnLixeira.setBounds(x, 240, 100, 100); // Posição e tamanho
+            btnLixeira.setBackground(listaLixeiras.get(key)); // Cor de fundo
+            btnLixeira.setText("");
+            btnLixeira.addActionListener(escolherLixeira(nomesLixos, listaLixos)); // Adiciona a ação criaada anteriormente
+            x += 110;
+        }
+    }
+    
+    // Retorna a ação de escolher a lixeira e verifica se acertou
+    public ActionListener escolherLixeira(ArrayList<String> nomesLixos, Map<String, String> listaLixos){
         // Ação dos botões das lixeiras
-        acaoBotoes = new ActionListener(){
+        escolheLixeira = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 // getSource() retorna um objeto Object que é pai de todos os outros, incluindo JButton
@@ -139,32 +169,7 @@ public class TelaPrincipal extends JFrame {
                 }
             }
         };
-        
-        // Lista de lixeiras com as cores correspondentes
-        Map<String, Color> listaLixeiras = new HashMap<>();  
-        listaLixeiras.put("lixeiraPapel", Color.BLUE);
-        listaLixeiras.put("lixeiraPlastico", Color.RED);
-        listaLixeiras.put("lixeiraVidro", Color.GREEN);
-        listaLixeiras.put("lixeiraMetal", Color.YELLOW);
-        listaLixeiras.put("lixeiraOrganica", Color.decode("#A0522D"));
-        listaLixeiras.put("lixeiraAmbulatorial", Color.WHITE);
-        listaLixeiras.put("lixeiraMadeira", Color.BLACK);
-        
-        // Cria os botões de lixeiras
-        int x = 10;
-        for(String key : listaLixeiras.keySet()){            
-            // Cria um botão para lixeira
-            JButton lixeira = new JButton(key);
-            
-            // Define as caracterísitcas dos botões
-            lixeira.setName(key); // nome que vem na chave do HashMap
-            this.painel.add(lixeira); // Adiciona no painel
-            lixeira.setBounds(x, 240, 100, 100); // Posição e tamanho
-            lixeira.setBackground(listaLixeiras.get(key)); // Cor de fundo
-            lixeira.setText("");
-            lixeira.addActionListener(acaoBotoes); // Adiciona a ação criaada anteriormente
-            x += 110;
-        }
+        return escolheLixeira;
     }
     
     // Função para alterar o lixo aleatoriamente durante o jogo
