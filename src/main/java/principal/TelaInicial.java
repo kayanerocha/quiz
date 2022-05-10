@@ -58,7 +58,7 @@ public class TelaInicial extends JFrame{
         
         // Cria botão que inicia o jogo no modo fácil
         iniciaJogoFacil = new JButton("Fácil");
-        iniciaJogoFacil.setName("iniciaJogo");
+        iniciaJogoFacil.setName("facil");
         this.painel.add(iniciaJogoFacil);
         iniciaJogoFacil.setBounds(90, 250, 100, 30);
         iniciaJogoFacil.setBackground(Color.decode("#87CEFA"));
@@ -66,7 +66,7 @@ public class TelaInicial extends JFrame{
         
         // Cria botão que inicia o jogo no modo médio
         iniciaJogoMedio = new JButton("Médio");
-        iniciaJogoMedio.setName("iniciaJogo");
+        iniciaJogoMedio.setName("medio");
         this.painel.add(iniciaJogoMedio);
         iniciaJogoMedio.setBounds(200, 250, 100, 30);
         iniciaJogoMedio.setBackground(Color.decode("#87CEFA"));
@@ -74,7 +74,7 @@ public class TelaInicial extends JFrame{
         
         // Cria botão que inicia o jogo no modo difícil
         iniciaJogoDificil = new JButton("Difícil");
-        iniciaJogoDificil.setName("iniciaJogo");
+        iniciaJogoDificil.setName("dificil");
         this.painel.add(iniciaJogoDificil);
         iniciaJogoDificil.setBounds(310, 250, 100, 30);
         iniciaJogoDificil.setBackground(Color.decode("#87CEFA"));

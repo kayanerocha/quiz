@@ -82,12 +82,13 @@ public class TelaPrincipal extends JFrame {
         this.painel.add(this.pontuacao);
         this.pontuacao.setBounds(550, 5, 100, 20);
         
-        
-        
-        // Label que mostra a quantidade de chances restantes
-        this.errosPermitidos = new JLabel("Erros Permitidos: " + numErrosPermitidos);
-        this.painel.add(this.errosPermitidos);
-        this.errosPermitidos.setBounds(550, 30, 200, 20);
+        // No modo fácil não tem limites de erros, então só aparece se for nos outros modos
+        if(modo != "facil"){
+            // Label que mostra a quantidade de chances restantes
+            this.errosPermitidos = new JLabel("Erros Permitidos: " + numErrosPermitidos);
+            this.painel.add(this.errosPermitidos);
+            this.errosPermitidos.setBounds(550, 30, 200, 20);
+        }
         
         
         
@@ -177,7 +178,9 @@ public class TelaPrincipal extends JFrame {
                 }
                 else{
                     resultado.setText("Errou, tente novamente.");
-                    numErrosPermitidos -= 1;
+                    if(modo != "facil"){
+                        numErrosPermitidos -= 1;
+                    }
                 }
                 // Atualiza os pontos
                 pontuacao.setText("Pontuação: " + pontos);
