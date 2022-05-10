@@ -4,6 +4,7 @@
  */
 package principal;
 
+import java.awt.Color;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
@@ -60,12 +61,10 @@ public class TelaPrincipal extends JFrame {
         listaLixos.put("ambulatorial", "src/images/img-ambulatorial.jpg");
         listaLixos.put("madeira", "src/images/img-madeira.jpg");
         
-        // Botão com lixo aleatório
-        JButton lixo = new JButton("lixo");
+        // Label com lixo aleatório
+        JLabel lixo = new JLabel("");
         lixo.setName("lixo");
-        // lixo.setEnabled(false);
         this.painel.add(lixo);
-        lixo.setBounds(300, 10, 200, 200); // Adiciona o botão em uma posição
         
         // Altera para um lixo aleatório
         alteraLixo(lixo, nomesLixos, listaLixos);
@@ -144,33 +143,34 @@ public class TelaPrincipal extends JFrame {
             }
         };
         
-        // Lista de lixeiras com o caminho da imagem
-        Map<String, String> listaLixeiras = new HashMap<>();        
-        listaLixeiras.put("lixeiraPapel", "src/images/img-lixeira-papel.jpg");
-        listaLixeiras.put("lixeiraPlastico", "src/images/img-lixeira-plastico.png");
-        listaLixeiras.put("lixeiraVidro", "src/images/img-lixeira-vidro.jpg");
-        listaLixeiras.put("lixeiraMetal", "src/images/img-lixeira-metal.jpg");
-        listaLixeiras.put("lixeiraOrganica", "src/images/img-lixeira-organica.jpg");
-        listaLixeiras.put("lixeiraAmbulatorial", "src/images/img-lixeira-ambulatorial.jpg");
-        listaLixeiras.put("lixeiraMadeira", "src/images/img-lixeira-madeira.png");
+        // Lista de lixeiras com as cores correspondentes
+        Map<String, Color> listaLixeiras = new HashMap<>();  
+        listaLixeiras.put("lixeiraPapel", Color.BLUE);
+        listaLixeiras.put("lixeiraPlastico", Color.RED);
+        listaLixeiras.put("lixeiraVidro", Color.GREEN);
+        listaLixeiras.put("lixeiraMetal", Color.YELLOW);
+        listaLixeiras.put("lixeiraOrganica", Color.decode("#A0522D"));
+        listaLixeiras.put("lixeiraAmbulatorial", Color.WHITE);
+        listaLixeiras.put("lixeiraMadeira", Color.BLACK);
         
         // Cria os botões de lixeiras
         int x = 10;
-        for(String key : listaLixeiras.keySet()){
-            // Cria uma imagem
-            Icon imagemLixeira = new ImageIcon(listaLixeiras.get(key));
-            
+        for(String key : listaLixeiras.keySet()){            
+            // Cria um botão para lixeira
             JButton lixeira = new JButton(key);
-            lixeira.setName(key);
-            this.painel.add(lixeira);
-            lixeira.setBounds(x, 240, 100, 100);
-            lixeira.setIcon(imagemLixeira);            
-            lixeira.addActionListener(acaoBotoes);
+            
+            // Define as caracterísitcas dos botões
+            lixeira.setName(key); // nome que vem na chave do HashMap
+            this.painel.add(lixeira); // Adiciona no painel
+            lixeira.setBounds(x, 240, 100, 100); // Posição e tamanho
+            lixeira.setBackground(listaLixeiras.get(key)); // Cor de fundo
+            lixeira.addActionListener(acaoBotoes); // Adiciona a ação criaada anteriormente
             x += 110;
         }
     }
     
-    public JButton alteraLixo(JButton lixo, ArrayList<String> nomesLixos, Map<String, String> listaLixos){        
+    // Função para alterar o lixo aleatoriamente durante o jogo
+    public JLabel alteraLixo(JLabel lixo, ArrayList<String> nomesLixos, Map<String, String> listaLixos){        
         if(nomesLixos.size() > 0){          
             // Escolhe lixo aleatório da lista
             Random rand = new Random();
@@ -179,14 +179,15 @@ public class TelaPrincipal extends JFrame {
             nomesLixos.remove(posicao); // Remove para não repetir
             
             Icon imagemLixo = new ImageIcon(listaLixos.get(nomeLixo));
+            int largura = imagemLixo.getIconWidth();
+            int altura = imagemLixo.getIconHeight();
             
             // Recebe as características de um novo lixo
-            lixo.setText(nomeLixo);
+            lixo.setBounds(300, 10, largura, altura); // posição e tamanho que muda de acordo com a imagem
             lixo.setName(nomeLixo);
             lixo.setIcon(imagemLixo);
         }else{
-            resultado.setText("Fim de jogo, você ganhou!.");
-            
+            resultado.setText("Fim de jogo, você ganhou!.");            
             finalizaJogo();
         }
         
