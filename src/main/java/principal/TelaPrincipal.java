@@ -137,7 +137,7 @@ public class TelaPrincipal extends JFrame {
                 jogadasRestantes.setText("Jogadas restantes: " + quantidadeChances);
                 
                 if(quantidadeChances == 0){
-                    resultado.setText("Fim de Jogo, você perdeu!");                    
+                    JOptionPane.showMessageDialog(null, "Fim de Jogo, você perdeu!");
                     finalizaJogo();
                 }
             }
@@ -188,7 +188,7 @@ public class TelaPrincipal extends JFrame {
             lixo.setName(nomeLixo);
             lixo.setIcon(imagemLixo);
         }else{
-            resultado.setText("Fim de jogo, você ganhou!.");            
+            JOptionPane.showMessageDialog(null, "Fim de Jogo, você ganhou!");
             finalizaJogo();
         }
         
