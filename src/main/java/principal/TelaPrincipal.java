@@ -21,8 +21,8 @@ public class TelaPrincipal extends JFrame {
     private String lixeira;
     private int pontos;
     private JLabel pontuacao;
-    private int quantidadeChances = 3;
-    private JLabel jogadasRestantes;
+    private int numErrosPermitidos = 3;
+    private JLabel errosPermitidos;
     private JLabel resultado;
     
     public TelaPrincipal(){
@@ -75,12 +75,12 @@ public class TelaPrincipal extends JFrame {
         this.pontuacao.setBounds(550, 5, 100, 20);
         
         // Label que mostra a quantidade de chances restantes
-        this.jogadasRestantes = new JLabel("Jogadas restantes: " + quantidadeChances);
-        this.painel.add(this.jogadasRestantes);
-        this.jogadasRestantes.setBounds(550, 30, 200, 20);
+        this.errosPermitidos = new JLabel("Erros Permitidos: " + numErrosPermitidos);
+        this.painel.add(this.errosPermitidos);
+        this.errosPermitidos.setBounds(550, 30, 200, 20);
         
         // Label que mostra se errou
-        this.resultado = new JLabel("Resultado");
+        this.resultado = new JLabel("");
         this.painel.add(this.resultado);
         this.resultado.setBounds(340, 280, 200, 200);
         
@@ -93,8 +93,6 @@ public class TelaPrincipal extends JFrame {
                 JButton botao = (JButton) e.getSource();
                 String tipoLixo = lixo.getName();
                 String lixeira = botao.getName();
-                
-                System.out.println("Lixo: " + tipoLixo);
                     
                 if(tipoLixo == "papel" && lixeira == "lixeiraPapel"){
                     resultado.setText("Acertou! Continue jogando.");
@@ -126,17 +124,16 @@ public class TelaPrincipal extends JFrame {
                     pontos += 1;
                 }
                 else{
-                    System.out.println("Errou");
                     resultado.setText("Errou, tente novamente.");
-                    quantidadeChances -= 1;
+                    numErrosPermitidos -= 1;
                 }
                 // Atualiza os pontos
                 pontuacao.setText("Pontuação: " + pontos);
                 
                 // Atualiza as chances restantes
-                jogadasRestantes.setText("Jogadas restantes: " + quantidadeChances);
+                errosPermitidos.setText("Jogadas restantes: " + numErrosPermitidos);
                 
-                if(quantidadeChances == 0){
+                if(numErrosPermitidos == 0){
                     JOptionPane.showMessageDialog(null, "Fim de Jogo, você perdeu!");
                     finalizaJogo();
                 }
