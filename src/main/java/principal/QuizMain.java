@@ -11,8 +11,7 @@ package principal;
 public class QuizMain {
     
     public static void main(String[] args){
-        TelaInicial telaInicial = new TelaInicial();
-        // TelaPrincipal tela = new TelaPrincipal();
+        new TelaInicial();
     }
     
 }
