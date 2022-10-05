@@ -67,8 +67,7 @@ public class TelaInicial extends JFrame{
         // Cria descrição do jogo
         descricao = new JTextArea("""
                             Escolha a cor correspondente a lixeira correta 
-                            que o lixo apresentado na tela deve ser jogado. 
-                            É permitido errar apenas 3 vezes. Boa sorte!
+                            que o lixo apresentado na tela deve ser jogado. Boa sorte!
                  """);
         descricao.setName("descricao");
         this.painel.add(descricao);
